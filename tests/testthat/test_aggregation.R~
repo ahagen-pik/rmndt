@@ -1,8 +1,0 @@
-test_that("Aggregation and dis-aggregation works with multiple dimensions", {
-    ## to iso countries, without weights (value reproduced)
-    FEiso <- toISO_dt(REMIND_FinalEnergy, REMIND_RegionMap)
-    region <- REMIND_RegionMap$region[1]
-    country <- REMIND_RegionMap$iso[1]
-    
-    expect_equal(REMIND_FinalEnergy[region == "CAZ"])
-})

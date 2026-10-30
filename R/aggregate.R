@@ -21,13 +21,22 @@ apply_weights <- function(data, mapping, weights, fewcol, manycol, valuecol, dat
 
         ## we are only interested in the matching cols and the weight col
         inboth <- intersect(colnames(data), colnames(weights))
-        weights <- weights[, c(inboth, weightcol), with=F]
 
         ## are there other dimensions to consider when applying the weights?
         othercols <- setdiff(inboth, manycol)
 
-        ## leftjoin data
-        data <- weights[data, on=c(manycol, othercols)]
+        ## leftjoin data: look up the row of the matching weight and add the weight column by reference,
+        ## this avoids a copy of the weights and of the data
+        idx <- weights[data, on=c(manycol, othercols), which=TRUE]
+        if(length(idx) != nrow(data)){
+            ## duplicated weights: keep the original join, which multiplies the data rows
+            weights <- weights[, c(inboth, weightcol), with=F]
+            data <- weights[data, on=c(manycol, othercols)]
+        } else {
+            set(data, j=weightcol, value=weights[[weightcol]][idx])
+            ## same column order as the original join weights[data]
+            setcolorder(data, c(inboth, weightcol))
+        }
 
         ## if there are NAs in the weights, the weights were incomplete along the additional dimension
         if(any(is.na(data[[weightcol]]))){
