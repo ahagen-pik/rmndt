@@ -12,3 +12,4 @@
 ^\.github$
 ^\.claude$
 ^_pkgdown\.yml$
+^CODE_STYLE\.md$

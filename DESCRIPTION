@@ -1,6 +1,6 @@
 Package: rmndt
 Title: Tools for data.table objects in the REMIND context
-Version: 0.7.0
+Version: 0.8.0
 Authors@R: c(
            person("Alois", "Dirnaichner", email = "dirnaichner@pik-potsdam.de", role = c("aut", "cre")),
            person("Alex K.", "Hagen",email = "alex.hagen@pik-potsdam.de", role = c("aut"), comment = c(ORCID = "0000-0003-4793-8664")))
@@ -17,5 +17,5 @@ Suggests:
     testthat,
     magclass,
     covr
-Date: 2026-08-05
-Config/roxygen2/version: 8.0.0
+Date: 2026-10-30
+Config/roxygen2/version: 8.1.1

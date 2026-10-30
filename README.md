@@ -1,6 +1,6 @@
 # Tools for data.table objects in the REMIND context
 
-R package **rmndt**, version **0.7.0**
+R package **rmndt**, version **0.8.0**
 
    [![R build status](https://github.com/ahagen-pik/rmndt/workflows/check/badge.svg)](https://github.com/ahagen-pik/rmndt/actions) [![codecov](https://codecov.io/gh/ahagen-pik/rmndt/branch/master/graph/badge.svg)](https://app.codecov.io/gh/ahagen-pik/rmndt) [![r-universe](https://pik-piam.r-universe.dev/badges/rmndt)](https://pik-piam.r-universe.dev/builds)
 
@@ -38,7 +38,7 @@ In case of questions / problems please contact Alois Dirnaichner <dirnaichner@pi
 
 To cite package **rmndt** in publications use:
 
-Dirnaichner A, Hagen A (2026). "rmndt: Tools for data.table objects in the REMIND context." Version: 0.7.0.
+Dirnaichner A, Hagen A (2026). "rmndt: Tools for data.table objects in the REMIND context." Version: 0.8.0.
 
 A BibTeX entry for LaTeX users is
 
@@ -46,8 +46,8 @@ A BibTeX entry for LaTeX users is
 @Misc{,
   title = {rmndt: Tools for data.table objects in the REMIND context},
   author = {Alois Dirnaichner and Alex K. Hagen},
-  date = {2026-08-05},
+  date = {2026-10-30},
   year = {2026},
-  note = {Version: 0.7.0},
+  note = {Version: 0.8.0},
 }
 ```
