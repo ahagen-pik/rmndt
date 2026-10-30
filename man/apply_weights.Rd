@@ -4,31 +4,20 @@
 \alias{apply_weights}
 \title{Internal function to apply the weights and perform some checks.}
 \usage{
-apply_weights(
-  data,
-  mapping,
-  weights,
-  fewcol,
-  manycol,
-  valuecol,
-  datacols,
-  weightcol
-)
+apply_weights(data, mapping, weights, fewcol, manycol, valuecol, weightcol)
 }
 \arguments{
 \item{data}{a data.table.}
 
 \item{mapping}{a mapping between the aggregated categories and their parts. *All* aggregated categories in `data` have to be part of the mapping.}
 
-\item{weights}{table with weights for disaggregation, the name of the column with the aggregated categories has to be `manycol`. If columns (other than the column with the aggregated category) of the `weights` coincide with columns of the data, the respective columns are considered when joining.}
+\item{weights}{table with weights for disaggregation, the name of the column with the dis-aggregated categories has to be `manycol`. If columns (other than the column with the dis-aggregated category) of the `weights` coincide with columns of the data, the respective columns are considered when joining.}
 
 \item{fewcol}{name of the column containing aggregated categories. Default is "region".}
 
 \item{manycol}{name of the column containing dis-aggregated categories. Default is "iso".}
 
 \item{valuecol}{name of the column with the actual value to disaggregate, default is `value`.}
-
-\item{datacols}{index columns that label categories which have to be treated seperately when dis-aggregating with a weight.}
 
 \item{weightcol}{column with the weights for the dis-aggregation, default is `weight`.}
 }

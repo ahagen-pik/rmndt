@@ -4,7 +4,8 @@
 \alias{disaggregate_dt}
 \title{Disaggregate data in a data.table object using a mapping.
 If no weights are given, the value for the aggregated categories is used on the disaggregated ones.
-If a weight is given, the values from the aggregated categories are distributed according to the weights.}
+If a weight is given, the values from the aggregated categories are distributed according to the weights,
+separately for each combination of the remaining index columns (all columns except `manycol` and `valuecol`).}
 \usage{
 disaggregate_dt(
   data,
@@ -28,14 +29,15 @@ disaggregate_dt(
 
 \item{valuecol}{name of the column with the actual value to disaggregate, default is `value`.}
 
-\item{datacols}{index columns that label categories which have to be treated seperately when dis-aggregating with a weight.}
+\item{datacols}{deprecated and ignored, all index columns are considered.}
 
-\item{weights}{table with weights for disaggregation, the name of the column with the aggregated categories has to be `manycol`. If columns (other than the column with the aggregated category) of the `weights` coincide with columns of the data, the respective columns are considered when joining.}
+\item{weights}{table with weights for disaggregation, the name of the column with the dis-aggregated categories has to be `manycol`. If columns (other than the column with the dis-aggregated category) of the `weights` coincide with columns of the data, the respective columns are considered when joining.}
 
 \item{weightcol}{column with the weights for the dis-aggregation, default is `weight`.}
 }
 \description{
 Disaggregate data in a data.table object using a mapping.
 If no weights are given, the value for the aggregated categories is used on the disaggregated ones.
-If a weight is given, the values from the aggregated categories are distributed according to the weights.
+If a weight is given, the values from the aggregated categories are distributed according to the weights,
+separately for each combination of the remaining index columns (all columns except `manycol` and `valuecol`).
 }

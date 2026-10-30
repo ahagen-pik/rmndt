@@ -68,3 +68,37 @@ test_that("Weighted disaggregation: column order, missing and duplicated weights
                            weights=rbind(weights, weights[iso == "B" & period == 2020]))
     expect_equal(out[period == 2020, value], c(10 / 7, 30 / 7, 30 / 7))
 })
+
+test_that("Time-invariant weights are applied separately for each year", {
+    mapping <- data.table(region=c("R", "R"), iso=c("A", "B"))
+    weights <- data.table(iso=c("A", "B"), weight=c(1, 3))
+
+    ## weighted average per year
+    data <- data.table(iso=c("A", "B", "A", "B"), year=c(2020, 2020, 2030, 2030), value=c(1, 3, 1, 3))
+    out <- aggregate_dt(data, mapping, datacols=NULL, weights=data.table(iso=c("A", "B"), weight=1))
+    expect_equal(out$value, c(2, 2))
+
+    ## disaggregation per year, re-aggregation reproduces the regional values
+    data <- data.table(region="R", year=c(2020, 2030), value=10)
+    out <- disaggregate_dt(data, mapping, datacols=NULL, weights=weights)
+    expect_equal(out[year == 2020, value], c(2.5, 7.5))
+    expect_equal(out[year == 2030, value], c(2.5, 7.5))
+    expect_equal(aggregate_dt(out, mapping)$value, c(10, 10))
+
+    ## GDP of a single year as weights for all years
+    gdp <- REMIND_GDP[year == 2020, c("iso", "weight")]
+    FEiso <- disaggregate_dt(REMIND_FinalEnergy, REMIND_RegionMap, weights=gdp)
+    FEsum <- aggregate_dt(FEiso, REMIND_RegionMap)
+    check <- merge(FEsum, REMIND_FinalEnergy, by=keys, all=TRUE)
+    expect_equal(check$value.x, check$value.y)
+})
+
+test_that("Aggregation keeps additional index columns", {
+    mapping <- data.table(region=c("R", "R"), iso=c("A", "B"))
+    data <- data.table(iso=c("A", "B", "A", "B"), year=2020, extra=c("x", "x", "y", "y"), value=1:4)
+    out <- aggregate_dt(data, mapping)
+    expect_identical(names(out), c("region", "year", "extra", "value"))
+    expect_equal(nrow(out), 2)
+    expect_equal(out[extra == "x", value], 3)
+    expect_equal(out[extra == "y", value], 7)
+})

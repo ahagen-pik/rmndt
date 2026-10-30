@@ -4,7 +4,9 @@
 \alias{aggregate_dt}
 \title{Aggregate values in a data.table object using a mapping.
 If no weight is given, the value for the aggregated categories is the sum of the parts.
-Otherwise, the weight is used to calculate a weighted average accross the parts.}
+Otherwise, the weight is used to calculate a weighted average across the parts.
+Values are aggregated separately for each combination of the remaining index columns
+(all columns except `manycol` and `valuecol`).}
 \usage{
 aggregate_dt(
   data,
@@ -19,26 +21,28 @@ aggregate_dt(
 )
 }
 \arguments{
-\item{data, }{a magpie object.}
+\item{data}{a data.table.}
 
-\item{mapping, }{a mapping between the aggregated categories in the data and ISO3 countrycodes. *All* regions in `data` have to be part of the mapping.}
+\item{mapping}{a mapping between the aggregated categories and their parts. Parts in `data` that are not in the mapping are omitted.}
 
-\item{fewcol, }{name of the column containing aggregated categories. Default is "region".}
+\item{fewcol}{name of the column containing aggregated categories. Default is "region".}
 
-\item{yearcol, }{name of the column containing time step info. Default is "year".}
+\item{yearcol}{deprecated and ignored, all index columns are considered.}
 
-\item{manycol, }{name of the column containing dis-aggregated categories. Default is "iso".}
+\item{manycol}{name of the column containing dis-aggregated categories. Default is "iso".}
 
-\item{datacols}{index columns that label categories which have to be treated seperately when aggregating with a weight.}
+\item{datacols}{deprecated and ignored, all index columns are considered.}
 
 \item{valuecol}{name of the column with the value to aggregate, default is `value`.}
 
-\item{weights}{table with weights for a (weighted average) aggregation, the name of the column with the aggregated categories has to be `manycol`. If columns (other than the column with the aggregated category) of the `weights` coincide with columns of the data, the respective columns are considered when joining.}
+\item{weights}{table with weights for a (weighted average) aggregation, the name of the column with the dis-aggregated categories has to be `manycol`. If columns (other than the column with the dis-aggregated category) of the `weights` coincide with columns of the data, the respective columns are considered when joining.}
 
 \item{weightcol}{column with the weights for aggregation, default is `weight`.}
 }
 \description{
 Aggregate values in a data.table object using a mapping.
 If no weight is given, the value for the aggregated categories is the sum of the parts.
-Otherwise, the weight is used to calculate a weighted average accross the parts.
+Otherwise, the weight is used to calculate a weighted average across the parts.
+Values are aggregated separately for each combination of the remaining index columns
+(all columns except `manycol` and `valuecol`).
 }
